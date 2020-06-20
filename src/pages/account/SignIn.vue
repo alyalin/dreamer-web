@@ -49,7 +49,9 @@
           ❗️ {{ error }}
         </div>
 
-        <div class="flex flex-col w-full w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
+        <div
+          class="flex flex-col w-full w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12"
+        >
           <div class="w-full mb-2">
             <label class="block text-sm mb-2 text-gray-600" for="email"
               >Почта</label
