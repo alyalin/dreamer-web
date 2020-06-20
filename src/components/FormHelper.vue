@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center mb-4">
     <div
-      class="flex flex-col items-center flex-no-wrap w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12"
+      class="flex flex-col items-center flex-no-wrap w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 px-10 sm:px-0"
     >
       <div class="h-px w-full bg-gray-400 mb-4" />
       <h2 class="text-lg font-bold mb-2">

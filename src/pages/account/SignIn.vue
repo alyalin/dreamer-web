@@ -2,11 +2,13 @@
   <Layout>
     <div>
       <h1 class="text-2xl mt-12 font-bold text-center mb-12">
-        Войдите чтобы получить доступ к своему профилю
+        Добро пожаловать на Дример!
       </h1>
 
       <div class="flex flex-col items-center justify-center mb-6">
-        <div class="w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12">
+        <div
+          class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 px-10 sm:px-0"
+        >
           <button
             class="w-full px-6 py-4 mx-auto block font-bold text-white rounded mb-2"
             style="background-color: #1b6dd1;"
@@ -26,7 +28,7 @@
 
       <div class="flex items-center justify-center mb-4">
         <div
-          class="flex items-center flex-no-wrap w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12"
+          class="flex items-center flex-no-wrap w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 px-10 sm:px-0"
         >
           <div class="h-px w-full bg-gray-400" />
           <div class="mx-1 text-gray-500">
@@ -37,10 +39,17 @@
       </div>
 
       <form
-        class="flex flex-col w-full justify-center items-center mb-4"
+        class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
         @submit.prevent="submit"
       >
-        <div class="flex flex-col w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12">
+        <div
+          v-if="error"
+          class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900"
+        >
+          ❗️ {{ error }}
+        </div>
+
+        <div class="flex flex-col w-full w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
           <div class="w-full mb-2">
             <label class="block text-sm mb-2 text-gray-600" for="email"
               >Почта</label
@@ -85,17 +94,6 @@
             >
               Поле обязательно для заполнения
             </div>
-          </div>
-
-          <div v-if="false" class="text-center text-red-600 mb-2">
-            Почта или пароль введены неверно
-          </div>
-
-          <div
-            v-if="error"
-            class="py-2 px-2 bg-red-500 rounded mb-2 border border-red-700 text-white"
-          >
-            {{ error }}
           </div>
 
           <button
@@ -162,9 +160,12 @@ export default {
           });
         }
       } catch (e) {
+        console.dir(e);
+        if (!e.status) {
+          this.error = 'Проверьте подключение к сети Интернет';
+        }
         if (e.response) {
           this.error = e.response.data.message;
-          this.reset();
         }
       }
     },
