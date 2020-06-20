@@ -1,0 +1,99 @@
+<template>
+  <Layout>
+    <h1 class="text-2xl mt-12 font-bold text-center mb-2">Забыли пароль?</h1>
+    <div class="text-center mb-12">Не волнуйтесь, shit happens</div>
+
+    <form
+      class="flex flex-col w-full justify-center items-center mb-4"
+      @submit.prevent="submit"
+    >
+      <div class="flex flex-col w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12">
+        <div class="w-full mb-4">
+          <label class="block text-sm mb-2 text-gray-600" for="email"
+            >Почта</label
+          >
+          <input
+            class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            id="email"
+            v-model.trim="$v.email.$model"
+            type="text"
+            placeholder="email@example.ru"
+            :class="{ 'border-red-600': $v.email.$error }"
+          />
+          <div v-if="!$v.email.email" class="text-red-600">
+            Введен неверный формат почты
+          </div>
+          <div
+            v-if="$v.email.$error && !$v.email.required"
+            class="text-red-600"
+          >
+            Поле обязательно для заполнения
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="w-full px-6 py-4 mx-auto block font-bold text-white rounded bg-purple-500"
+        >
+          Восстановить пароль
+        </button>
+      </div>
+    </form>
+
+    <div class="flex items-center justify-center mb-4">
+      <div
+        class="flex flex-col items-center flex-no-wrap w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12"
+      >
+        <div class="h-px w-full bg-gray-400 mb-4"></div>
+        <div class="inline-flex text-lg">
+          <h2 class="font-bold mr-2">Передумали?</h2>
+          <g-link
+            to="/account/sign-in/"
+            class="text-purple-500 font-bold no-underline"
+          >
+            Войти
+          </g-link>
+        </div>
+      </div>
+    </div>
+  </Layout>
+</template>
+
+<script>
+import { mapGetters } from 'vuex';
+import { email, minLength, required } from 'vuelidate/lib/validators';
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  validations: {
+    email: {
+      required,
+      email,
+    },
+  },
+  metaInfo: {
+    title: 'Восстановление пароля',
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuth']),
+  },
+  methods: {
+    async submit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+      } else {
+        // await this.$store.dispatch('auth/login', {
+        //   email: this.email,
+        //   password: this.password
+        // })
+      }
+    },
+  },
+};
+</script>
+
+<style></style>
