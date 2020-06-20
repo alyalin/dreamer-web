@@ -27,9 +27,11 @@
       <div
         class="flex items-center flex-no-wrap w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12"
       >
-        <div class="h-px w-full bg-gray-400"></div>
-        <div class="mx-1 text-gray-500">или</div>
-        <div class="h-px w-full bg-gray-400"></div>
+        <div class="h-px w-full bg-gray-400" />
+        <div class="mx-1 text-gray-500">
+          или
+        </div>
+        <div class="h-px w-full bg-gray-400" />
       </div>
     </div>
 
@@ -122,7 +124,7 @@
       helper-text="У вас уже есть аккаунт?"
       href="/account/sign-in/"
       button-text="Войти"
-    ></form-helper>
+    />
   </Layout>
 </template>
 
@@ -135,12 +137,6 @@ export default {
   components: {
     FormHelper,
   },
-  metaInfo: {
-    title: 'Зарегистрироваться',
-  },
-  computed: {
-    ...mapGetters('auth', ['isRegSucceed']),
-  },
   data() {
     return {
       email: '',
@@ -148,6 +144,12 @@ export default {
       checkbox: false,
       error: '',
     };
+  },
+  metaInfo: {
+    title: 'Зарегистрироваться',
+  },
+  computed: {
+    ...mapGetters('auth', ['isRegSucceed']),
   },
   validations: {
     email: {

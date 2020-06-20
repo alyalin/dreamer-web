@@ -28,9 +28,11 @@
         <div
           class="flex items-center flex-no-wrap w-7/12 sm:w-6/12 md:w-5/12 lg:w-4/12"
         >
-          <div class="h-px w-full bg-gray-400"></div>
-          <div class="mx-1 text-gray-500">или</div>
-          <div class="h-px w-full bg-gray-400"></div>
+          <div class="h-px w-full bg-gray-400" />
+          <div class="mx-1 text-gray-500">
+            или
+          </div>
+          <div class="h-px w-full bg-gray-400" />
         </div>
       </div>
 
@@ -44,9 +46,9 @@
               >Почта</label
             >
             <input
-              class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
               id="email"
               v-model.trim="$v.email.$model"
+              class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
               type="text"
               placeholder="email@example.ru"
               :class="{ 'border-red-600': $v.email.$error }"
@@ -106,16 +108,16 @@
       </form>
 
       <div class="flex justify-center mb-4">
-        <g-link class="text-purple-500 no-underline" to="/account/recover/"
-          >Забыли пароль?</g-link
-        >
+        <g-link class="text-purple-500 no-underline" to="/account/recover/">
+          Забыли пароль?
+        </g-link>
       </div>
 
       <form-helper
         helper-text="У вас нет аккаунта?"
         href="/account/sign-up/"
         button-text="Зарегистрироваться"
-      ></form-helper>
+      />
     </div>
   </Layout>
 </template>

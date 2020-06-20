@@ -1,29 +1,29 @@
 <template>
   <Layout>
     <div>
-      <div class="w-full h-64 bg-gray-300 mb-8"></div>
+      <div class="w-full h-64 bg-gray-300 mb-8" />
       <div class="w-full flex flex-no-wrap overflow-y-auto mb-8">
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+        <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
       </div>
 
-      <div class="w-full h-64 bg-gray-300 mb-8"></div>
+      <div class="w-full h-64 bg-gray-300 mb-8" />
       <div class="w-full overflow-y-auto">
         <div class="flex flex-no-wrap">
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
-          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64"></div>
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
+          <div class="flex-shrink-0 w-4/12 mx-4 bg-gray-300 h-64" />
         </div>
       </div>
     </div>

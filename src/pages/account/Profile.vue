@@ -1,7 +1,9 @@
 <template>
   <Layout>
     <div class="container mx-auto px-6">
-      <h1 class="text-3xl font-bold mb-4">Мой профиль</h1>
+      <h1 class="text-3xl font-bold mb-4">
+        Мой профиль
+      </h1>
       <template v-if="info">
         <div><strong>Почта:</strong> {{ info.email }}</div>
         <div><strong>Аккаунт создан:</strong> {{ info.created }}</div>
@@ -28,6 +30,9 @@ export default {
       error: '',
     };
   },
+  computed: {
+    ...mapGetters('profile', ['info']),
+  },
   async mounted() {
     try {
       await this.$store.dispatch('profile/getProfile');
@@ -39,9 +44,6 @@ export default {
   },
   metaInfo: {
     title: 'Профиль',
-  },
-  computed: {
-    ...mapGetters('profile', ['info']),
   },
   methods: {
     handleLogout() {
