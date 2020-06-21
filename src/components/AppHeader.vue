@@ -6,14 +6,14 @@
       Dreamer
     </g-link>
     <g-link
-      v-if="!isAuth"
+      v-show="!isAuth"
       to="/account/sign-in/"
       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded no-underline"
     >
       Войти
     </g-link>
     <g-link
-      v-if="isAuth"
+      v-show="isAuth"
       to="/account/profile/"
       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded no-underline"
     >
