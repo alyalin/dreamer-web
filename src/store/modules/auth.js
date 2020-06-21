@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { parseJwt } from '../../utils/jwt-decode';
 
 const authModule = {
   namespaced: true,
@@ -23,6 +24,7 @@ const authModule = {
           { withCredentials: true },
         );
         const jwt = token.data.access_token;
+        const jwtExpiresIn = parseJwt(jwt).exp;
 
         Cookies.set('jwt', jwt, {
           expires: new Date(jwtExpiresIn * 1000),
