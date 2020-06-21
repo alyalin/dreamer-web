@@ -64,12 +64,13 @@ const authModule = {
           withCredentials: true,
         });
         commit('SET_AUTHENTICATED_STATE', false);
+        Cookies.remove('jwt');
         this.$router.push('/');
       } catch (e) {
         commit('SET_AUTHENTICATED_STATE', false);
         console.warn(e);
       }
-    }
+    },
   },
   getters: {
     isAuth: (state) => state.isAuth,
