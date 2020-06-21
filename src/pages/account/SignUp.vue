@@ -39,6 +39,14 @@
       class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
       @submit.prevent="submit"
     >
+
+      <div
+        v-if="error"
+        class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900"
+      >
+        ❗️ {{ error }}
+      </div>
+
       <div class="flex flex-col w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
         <div class="w-full mb-2">
           <label class="block text-sm mb-2 text-gray-600" for="email"
@@ -101,12 +109,6 @@
           </label>
         </div>
 
-        <div
-          v-if="error"
-          class="py-2 px-2 bg-red-500 rounded mb-2 border border-red-700 text-white"
-        >
-          {{ error }}
-        </div>
         <div
           v-if="isRegSucceed"
           class="py-2 px-2 bg-green-500 rounded mb-2 border border-green-700 text-white"
@@ -175,13 +177,11 @@ export default {
             checkbox: this.checkbox,
           });
           this.error = '';
-          this.reset();
           this.$v.reset();
         }
       } catch (e) {
         if (e.response) {
-          this.error = e.response.data.message;
-          this.reset();
+          this.error = 'Такой пользователь уже существует';
         }
       }
     },
