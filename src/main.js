@@ -2,10 +2,14 @@
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 
 import Vuex from 'vuex';
+import Vuelidate from 'vuelidate/src';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import createAuthRefreshInterceptor from 'axios-auth-refresh';
+
 import DefaultLayout from '~/layouts/Default.vue';
 import rootStore from './store';
-import Vuelidate from 'vuelidate/src';
-import axios from 'axios';
+import { parseJwt } from './utils/jwt-decode';
 
 export default async function (Vue, { router, head, isClient, appOptions }) {
   // Set default layout as a global component
@@ -17,31 +21,61 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
   appOptions.store = storeInstance;
   appOptions.store.$router = router;
 
-  if (isClient) {
-    const axiosConfig = {
-      baseURL: process.env.GRIDSOME_API_URL,
-      timeout: 30000,
-    };
-    const axiosInstance = axios.create(axiosConfig);
-    const token = await axiosInstance.post(
-      '/auth/refresh-token',
-      {},
-      { withCredentials: true },
-    );
-    axiosInstance.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${token.data.access_token}`;
+  const cookieJwt = Cookies.get('jwt');
 
-    Vue.prototype.$axios = axiosInstance;
-    appOptions.store.$axios = axiosInstance;
+  if (cookieJwt) {
+    storeInstance.commit('auth/SET_AUTHENTICATED_STATE', true);
   }
 
-  // if (isClient) {
-  //   // await storeInstance.dispatch('auth/getToken');
-  //   const token = storeInstance.state.auth.token;
-  //   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  // }
+  const axiosConfig = {
+    baseURL: process.env.GRIDSOME_API_URL,
+    timeout: 10000,
+    // headers: { Authorization: `Bearer ${cookieJwt}` },
+  };
 
+  const axiosInstance = axios.create(axiosConfig);
+
+  Vue.prototype.$axios = axiosInstance;
+  appOptions.store.$axios = axiosInstance;
+
+  if (!cookieJwt) {
+    try {
+      const token = await axiosInstance.post(
+        '/auth/refresh-token',
+        {},
+        { withCredentials: true },
+      );
+      setJwtCookie(token.data.access_token);
+      storeInstance.commit('auth/SET_AUTHENTICATED_STATE', true);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  axiosInstance.interceptors.request.use((request) => {
+    const token = Cookies.get('jwt');
+    if (Cookies.get('jwt')) {
+      request.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+    return request;
+  });
+
+  // Function that will be called to refresh authorization
+  const refreshAuthLogic = (failedRequest) =>
+    axiosInstance
+      .post('/auth/refresh-token', {}, { withCredentials: true })
+      .then((tokenRefreshResponse) => {
+        const jwt = tokenRefreshResponse.data.access_token;
+        setJwtCookie(jwt);
+        failedRequest.response.config.headers['Authorization'] =
+          'Bearer ' + jwt;
+        return Promise.resolve();
+      });
+
+  // Instantiate the interceptor (you can chain it as it returns the axios instance)
+  createAuthRefreshInterceptor(axiosInstance, refreshAuthLogic);
+
+  // route guards goes here
   router.beforeEach((to, from, next) => {
     // Do stuff before next page load
     // if (to.path === '/account/sign-in/') {
@@ -50,29 +84,13 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
     // }
     next();
   });
+}
 
-  // axiosInstance.interceptors.response.use(config => {
-  //   console.log('request');
-  //   const token = storeInstance.state.auth.token;
-  //   console.log(token);
-  //   if (token) {
-  //     config.headers.common['Authorization'] = `Bearer ${token}`
-  //   }
-  //   return config;
-  // })
-
-  let tokenTimer;
-
-  // inject('startJwtRefresh', async () => {
-  //   if (store.state.auth.token) {
-  //     const expTime = parseJwt(store.state.auth.token).exp
-  //     let refreshInterval = (expTime * 1000 - Date.now()) * 0.75
-  //     tokenTimer = setInterval(async () => {
-  //       await store.dispatch('auth/getToken', { app });
-  //     }, refreshInterval)
-  //   }
-  // })
-  // inject('stopJwtRefresh', async () => clearInterval(tokenTimer))
-
-  // app.$startJwtRefresh();
+function setJwtCookie(jwt) {
+  const jwtExpiresIn = parseJwt(jwt).exp;
+  Cookies.set('jwt', jwt, {
+    expires: new Date(jwtExpiresIn * 1000),
+    sameSite: 'strict',
+    secure: process.env.NODE_ENV === 'production',
+  });
 }
