@@ -10,6 +10,7 @@ import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import DefaultLayout from '~/layouts/Default.vue';
 import rootStore from './store';
 import { parseJwt } from './utils/jwt-decode';
+import { req } from 'vuelidate/lib/validators/common';
 
 export default async function (Vue, { router, head, isClient, appOptions }) {
   // Set default layout as a global component
@@ -22,6 +23,7 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
   appOptions.store.$router = router;
 
   const cookieJwt = Cookies.get('jwt');
+  let CSRFToken;
 
   if (cookieJwt) {
     storeInstance.commit('auth/SET_AUTHENTICATED_STATE', true);
@@ -38,12 +40,23 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
   Vue.prototype.$axios = axiosInstance;
   appOptions.store.$axios = axiosInstance;
 
+  try {
+    CSRFToken = await axiosInstance.get('/auth/csrf-token', {
+      withCredentials: true,
+    });
+  } catch (e) {
+    console.warn('CSRF TOKEN NOT AVAILABLE');
+  }
+
   if (!cookieJwt) {
     try {
       const token = await axiosInstance.post(
         '/auth/refresh-token',
         {},
-        { withCredentials: true },
+        {
+          withCredentials: true,
+          headers: { 'X-CSRF-Token': CSRFToken.data.token },
+        },
       );
       setJwtCookie(token.data.access_token);
       storeInstance.commit('auth/SET_AUTHENTICATED_STATE', true);
@@ -54,6 +67,10 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
 
   axiosInstance.interceptors.request.use((request) => {
     const token = Cookies.get('jwt');
+    console.log(request);
+    if (CSRFToken) {
+      request.headers.common['X-CSRF-Token'] = CSRFToken.data.token;
+    }
     if (Cookies.get('jwt')) {
       request.headers.common['Authorization'] = `Bearer ${token}`;
     }
