@@ -10,7 +10,6 @@ import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import DefaultLayout from '~/layouts/Default.vue';
 import rootStore from './store';
 import { parseJwt } from './utils/jwt-decode';
-import { req } from 'vuelidate/lib/validators/common';
 
 export default async function (Vue, { router, head, isClient, appOptions }) {
   // Set default layout as a global component
@@ -36,6 +35,33 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
   };
 
   const axiosInstance = axios.create(axiosConfig);
+
+  // Function that will be called to refresh authorization
+  const refreshAuthLogic = (failedRequest) =>
+    axiosInstance
+      .post('/auth/refresh-token', {}, { withCredentials: true })
+      .then((tokenRefreshResponse) => {
+        const jwt = tokenRefreshResponse.data.access_token;
+        setJwtCookie(jwt);
+        failedRequest.response.config.headers['Authorization'] =
+          'Bearer ' + jwt;
+        return Promise.resolve();
+      });
+
+  // Instantiate the interceptor (you can chain it as it returns the axios instance)
+  createAuthRefreshInterceptor(axiosInstance, refreshAuthLogic);
+
+  axiosInstance.interceptors.request.use((request) => {
+    const token = Cookies.get('jwt');
+    console.log(request);
+    if (CSRFToken) {
+      request.headers.common['X-CSRF-Token'] = CSRFToken.data.token;
+    }
+    if (Cookies.get('jwt')) {
+      request.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+    return request;
+  });
 
   Vue.prototype.$axios = axiosInstance;
   appOptions.store.$axios = axiosInstance;
@@ -64,33 +90,6 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
       console.log(e);
     }
   }
-
-  axiosInstance.interceptors.request.use((request) => {
-    const token = Cookies.get('jwt');
-    console.log(request);
-    if (CSRFToken) {
-      request.headers.common['X-CSRF-Token'] = CSRFToken.data.token;
-    }
-    if (Cookies.get('jwt')) {
-      request.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-    return request;
-  });
-
-  // Function that will be called to refresh authorization
-  const refreshAuthLogic = (failedRequest) =>
-    axiosInstance
-      .post('/auth/refresh-token', {}, { withCredentials: true })
-      .then((tokenRefreshResponse) => {
-        const jwt = tokenRefreshResponse.data.access_token;
-        setJwtCookie(jwt);
-        failedRequest.response.config.headers['Authorization'] =
-          'Bearer ' + jwt;
-        return Promise.resolve();
-      });
-
-  // Instantiate the interceptor (you can chain it as it returns the axios instance)
-  createAuthRefreshInterceptor(axiosInstance, refreshAuthLogic);
 
   // route guards goes here
   router.beforeEach((to, from, next) => {
