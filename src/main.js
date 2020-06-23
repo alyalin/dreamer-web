@@ -53,7 +53,6 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
 
   axiosInstance.interceptors.request.use((request) => {
     const token = Cookies.get('jwt');
-    console.log(request);
     if (CSRFToken) {
       request.headers.common['X-CSRF-Token'] = CSRFToken.data.token;
     }
