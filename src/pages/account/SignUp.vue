@@ -4,24 +4,7 @@
       Создайте свой аккаунт
     </h1>
 
-    <div class="flex flex-col items-center justify-center mb-6">
-      <div class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 px-10 sm:px-0">
-        <button
-          class="w-full px-6 py-4 mx-auto block font-bold text-white rounded mb-2"
-          style="background-color: #1b6dd1;"
-          type="button"
-        >
-          Войти с помощью Facebook
-        </button>
-        <button
-          class="w-full px-6 py-4 mx-auto block font-bold text-white rounded"
-          style="background-color: #5181b8;"
-          type="button"
-        >
-          Войти с помощью Вконтакте
-        </button>
-      </div>
-    </div>
+    <SocialLogin></SocialLogin>
 
     <div class="flex items-center justify-center mb-4">
       <div
@@ -49,11 +32,11 @@
 
       <div class="flex flex-col w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
         <div class="w-full mb-2">
-          <label class="block text-sm mb-2 text-gray-600" for="email"
+          <label class="block text-sm mb-2 text-gray-600" for="sign-up-email"
             >Почта</label
           >
           <input
-            id="email"
+            id="sign-up-email"
             v-model.trim="$v.email.$model"
             class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="text"
@@ -72,11 +55,11 @@
         </div>
 
         <div class="w-full mb-4">
-          <label class="block text-sm mb-2 text-gray-600" for="password"
+          <label class="block text-sm mb-2 text-gray-600" for="sign-up-password"
             >Пароль</label
           >
           <input
-            id="password"
+            id="sign-up-password"
             v-model.trim="$v.password.$model"
             class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="password"
@@ -135,11 +118,13 @@
 <script>
 import { email, minLength, required } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
-import FormHelper from '../../components/FormHelper';
+import FormHelper from '~/components/FormHelper';
+import SocialLogin from '~/components/SocialLogin';
 
 export default {
   components: {
     FormHelper,
+    SocialLogin,
   },
   data() {
     return {
