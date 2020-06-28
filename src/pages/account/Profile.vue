@@ -7,6 +7,9 @@
       <template v-if="info">
         <div><strong>Почта:</strong> {{ info.email }}</div>
         <div><strong>Аккаунт создан:</strong> {{ info.created }}</div>
+        <div><strong>Роль:</strong> {{ info.role }}</div>
+        <div><strong>Facebook</strong> {{ info.facebook_id ? '✅' : '' }}</div>
+        <div><strong>Vk</strong> {{ info.vk_id ? '✅' : '' }}</div>
         <div>
           <strong>Верифицирован:</strong> {{ info.verified ? 'Да' : 'Нет' }}
         </div>
