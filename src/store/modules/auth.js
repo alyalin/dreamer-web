@@ -18,26 +18,12 @@ const authModule = {
   actions: {
     async login({ commit }, { email, password }) {
       try {
-        const token = await this.$axios.post(
+        const { data } = await this.$axios.post(
           '/auth/signin',
           { email, password },
           { withCredentials: true },
         );
-        const jwt = token.data.access_token;
-        const jwtExpiresIn = parseJwt(jwt).exp;
-
-        Cookies.set('jwt', jwt, {
-          expires: new Date(jwtExpiresIn * 1000),
-          sameSite: 'strict',
-          secure: process.env.NODE_ENV === 'production',
-        });
-
-        this.$router.push('/');
-
-        commit('SET_AUTHENTICATED_STATE', !!jwt);
-
-        // await this.app.$stopJwtRefresh()
-        // await this.app.$startJwtRefresh()
+        handleLoginSuccess(commit, data.access_token, this.$router);
       } catch (error) {
         throw error;
       }
@@ -71,11 +57,39 @@ const authModule = {
         console.warn(e);
       }
     },
+
+    async sendFacebookToken({ commit }, token) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/fb/token',
+          { token },
+          { withCredentials: true },
+        );
+
+        handleLoginSuccess(commit, data.access_token, this.$router);
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
   getters: {
     isAuth: (state) => state.isAuth,
     isRegSucceed: (state) => state.isRegSucceed,
   },
 };
+
+function handleLoginSuccess(commit, jwt, router) {
+  const jwtExpiresIn = parseJwt(jwt).exp;
+
+  Cookies.set('jwt', jwt, {
+    expires: new Date(jwtExpiresIn * 1000),
+    sameSite: 'strict',
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  router.push('/');
+
+  commit('SET_AUTHENTICATED_STATE', !!jwt);
+}
 
 export default authModule;
