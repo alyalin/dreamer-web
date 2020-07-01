@@ -71,6 +71,19 @@ const authModule = {
         console.log(e);
       }
     },
+    async sendVkToken({ commit }, token) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/vk/token',
+          { token },
+          { withCredentials: true },
+        );
+
+        handleLoginSuccess(commit, data.access_token, this.$router);
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
   getters: {
     isAuth: (state) => state.isAuth,
@@ -87,7 +100,7 @@ function handleLoginSuccess(commit, jwt, router) {
     secure: process.env.NODE_ENV === 'production',
   });
 
-  router.push('/');
+  router.replace('/');
 
   commit('SET_AUTHENTICATED_STATE', !!jwt);
 }

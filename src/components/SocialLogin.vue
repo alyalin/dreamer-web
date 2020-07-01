@@ -13,10 +13,13 @@
         class="w-full px-6 py-4 mx-auto block font-bold text-white rounded"
         style="background-color: #5181b8;"
         type="button"
+        @click="vkSignIn"
       >
         Войти с помощью Вконтакте
       </button>
     </div>
+
+    <div id="vk_api_transport"></div>
   </div>
 </template>
 
@@ -45,11 +48,17 @@ export default Vue.extend({
       );
     },
 
+    async vkSignIn() {
+      location.replace(
+        `https://oauth.vk.com/authorize?client_id=7527042&display=page&redirect_uri=http://localhost:8080/account/vk-callback&scope=email&response_type=code&v=5.120`,
+      );
+    },
+
     async initFacebook() {
       window.fbAsyncInit = function () {
         window.FB.init({
           appId: '552866345407693',
-          cookie: true,
+          cookie: false,
           version: 'v7.0',
         });
       };
