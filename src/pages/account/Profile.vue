@@ -5,8 +5,8 @@
         Мой профиль
       </h1>
       <template v-if="info">
-        <div><strong>Имя:</strong> {{ info.username }}</div>
-        <div><strong>Фамилия:</strong> {{ info.lastname }}</div>
+        <div><strong>Имя:</strong> {{ info.firstName }}</div>
+        <div><strong>Фамилия:</strong> {{ info.lastName }}</div>
         <div><strong>Почта:</strong> {{ info.email }}</div>
         <div><strong>Аккаунт создан:</strong> {{ info.created }}</div>
         <div><strong>Роль:</strong> {{ info.role }}</div>
