@@ -50,7 +50,7 @@ export default Vue.extend({
 
     async vkSignIn() {
       location.replace(
-        `https://oauth.vk.com/authorize?client_id=7527042&display=page&redirect_uri=http://localhost:8080/account/vk-callback&scope=email&response_type=code&v=5.120`,
+        `https://oauth.vk.com/authorize?client_id=7527042&display=page&redirect_uri=${process.env.GRIDSOME_VK_REDIRECT}&scope=email&response_type=code&v=5.120`,
       );
     },
 
