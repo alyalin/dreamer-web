@@ -11,7 +11,9 @@ export default {
   async mounted() {
     const token = this.$route.query.code;
     if (token) {
-      await this.$store.dispatch('auth/sendVkToken', token);
+      setTimeout(async () => {
+        await this.$store.dispatch('auth/sendVkToken', token);
+      }, 500);
     }
     this.$router.replace({ path: '/' });
   },
