@@ -2,7 +2,6 @@
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 
 import Vuex from 'vuex';
-import Vuelidate from 'vuelidate/src';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
@@ -15,7 +14,6 @@ export default async function (Vue, { router, head, isClient, appOptions }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout);
   Vue.use(Vuex);
-  Vue.use(Vuelidate);
 
   const storeInstance = rootStore();
   appOptions.store = storeInstance;

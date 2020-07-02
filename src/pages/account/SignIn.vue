@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import FormHelper from '~/components/FormHelper';
 import SocialLogin from '~/components/SocialLogin';
@@ -115,6 +116,7 @@ export default {
     FormHelper,
     SocialLogin,
   },
+  mixins: [validationMixin],
   metaInfo: {
     title: 'Войти в свой профиль',
   },

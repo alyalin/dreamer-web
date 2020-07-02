@@ -66,9 +66,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { email, minLength, required } from 'vuelidate/lib/validators';
+import { validationMixin } from 'vuelidate';
+import { email, required } from 'vuelidate/lib/validators';
 
 export default {
+  mixins: [validationMixin],
   data() {
     return {
       email: '',
