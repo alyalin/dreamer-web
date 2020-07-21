@@ -148,7 +148,7 @@ export default {
     },
     password: {
       required,
-      minLength: minLength(0),
+      minLength: minLength(8),
     },
   },
   methods: {
