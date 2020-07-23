@@ -22,11 +22,24 @@
       class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
       @submit.prevent="submit"
     >
+
+      <div
+        v-if="isRegSucceed"
+        class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-green-200 rounded mb-2 border border-green-700 text-gray-900 flex"
+      >
+        <span class="mr-2">✅</span> Вы успешно зарегистрированы
+      </div>
+
       <div
         v-if="error"
-        class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900"
+        class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900 flex"
       >
-        ❗️ {{ error }}
+        <span class="mr-8">❌</span>
+        <ul class="list-disc">
+          <li v-for="err in error">
+            {{ err }}
+          </li>
+        </ul>
       </div>
 
       <div class="flex flex-col w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
@@ -62,8 +75,8 @@
             v-model.trim="$v.password.$model"
             class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="password"
+            name="new-password"
             placeholder="Минимум 6 знаков"
-            autocomplete="new-password"
             :class="{ 'border-red-600': $v.password.$error }"
           />
           <div v-if="!$v.password.minLength" class="text-red-600">
@@ -91,12 +104,6 @@
           </label>
         </div>
 
-        <div
-          v-if="isRegSucceed"
-          class="py-2 px-2 bg-green-500 rounded mb-2 border border-green-700 text-white"
-        >
-          Вы успешно зарегистрированы
-        </div>
         <button
           type="submit"
           class="w-full px-6 py-4 mx-auto block font-bold text-white rounded bg-purple-500"
@@ -163,11 +170,21 @@ export default {
             checkbox: this.checkbox,
           });
           this.error = '';
+          this.password = '';
+          this.email = '';
           this.$v.reset();
         }
       } catch (e) {
-        if (e.response) {
-          this.error = 'Такой пользователь уже существует';
+        if (e.response.data.message) {
+          const errors = e.response.data.message;
+
+          if (typeof errors === 'string') {
+            this.error = [e.response.data.message];
+          }
+
+          if (errors instanceof Array) {
+            this.error = e.response.data.message;
+          }
         }
       }
     },
