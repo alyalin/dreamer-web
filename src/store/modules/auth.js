@@ -25,7 +25,7 @@ const authModule = {
         const { data } = await this.$axios.post(
           '/auth/signin',
           { email, password },
-          { withCredentials: true },
+          { withCredentials: true, skipAuthRefresh: true },
         );
         handleLoginSuccess(commit, data.access_token, this.$router);
       } catch (error) {

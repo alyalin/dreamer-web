@@ -25,9 +25,14 @@
       >
         <div
           v-if="error"
-          class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900"
+          class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900 flex"
         >
-          ❗️ {{ error }}
+          <span class="mr-8">❌</span>
+          <ul class="list-disc">
+            <li v-for="err in error">
+              {{ err }}
+            </li>
+          </ul>
         </div>
 
         <div
@@ -151,12 +156,21 @@ export default {
           });
         }
       } catch (e) {
-        console.dir(e);
         if (!e.status) {
-          this.error = 'Проверьте подключение к сети Интернет';
+          this.error = ['Что-то пошло не так'];
         }
-        if (e.response) {
-          this.error = e.response.data.message;
+        if (e.response.data.message) {
+
+          console.dir(e);
+          const errors = e.response.data.message;
+
+          if (typeof errors === 'string') {
+            this.error = [e.response.data.message];
+          }
+
+          if (errors instanceof Array) {
+            this.error = e.response.data.message;
+          }
         }
       }
     },
