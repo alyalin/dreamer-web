@@ -67,6 +67,8 @@
               v-model.trim="$v.password.$model"
               class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
               type="password"
+              name="current-password"
+              autocomplete="current-password"
               placeholder="Минимум 6 знаков"
               :class="{ 'border-red-600': $v.password.$error }"
             />
@@ -106,7 +108,7 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import FormHelper from '~/components/FormHelper';
 import SocialLogin from '~/components/SocialLogin';
