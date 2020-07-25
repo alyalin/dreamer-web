@@ -8,7 +8,6 @@
       class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
       @submit.prevent="submit"
     >
-
       <div
         v-if="showSuccessMessage"
         class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-green-200 rounded mb-2 border border-green-700 text-gray-900 flex"
@@ -22,7 +21,7 @@
       >
         <span class="mr-8">❌</span>
         <ul class="list-disc">
-          <li v-for="err in errorText">
+          <li v-for="(err, index) in errorText" :key="index">
             {{ err }}
           </li>
         </ul>
@@ -35,13 +34,20 @@
           >
           <input
             id="password"
-            name="new-password"
             v-model.trim="$v.password.$model"
+            name="new-password"
             class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="password"
             :class="{ 'border-red-600': $v.password.$error }"
           />
-          <password class="max-w-none" v-model="password" :strength-meter-only="true" :secureLength="8" :toggle="true" :showPassword="true"/>
+          <password
+            v-model="password"
+            class="max-w-none"
+            :strength-meter-only="true"
+            :secure-length="8"
+            :toggle="true"
+            :show-password="true"
+          />
           <div v-if="!$v.password.minLength" class="text-red-600">
             Пароль должен иметь минимум
             {{ $v.password.$params.minLength.min }} знаков.
@@ -60,8 +66,8 @@
           >
           <input
             id="repeatPassword"
-            name="new-password"
             v-model.trim="$v.repeatPassword.$model"
+            name="new-password"
             class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="password"
             :class="{ 'border-red-600': $v.repeatPassword.$error }"
@@ -106,8 +112,8 @@ import { required, minLength, sameAs } from 'vuelidate/lib/validators';
 import Password from 'vue-password-strength-meter';
 
 export default {
-  mixins: [validationMixin],
   components: { Password },
+  mixins: [validationMixin],
   data() {
     return {
       password: '',
@@ -115,7 +121,7 @@ export default {
       token: '',
       showSuccessMessage: false,
       showErrorMessage: false,
-      errorText: ''
+      errorText: '',
     };
   },
   validations: {
@@ -144,11 +150,10 @@ export default {
           this.showSuccessMessage = false;
           this.showErrorMessage = false;
         } else {
-
           await this.$store.dispatch('auth/resetPassword', {
             hash: this.token,
             password: this.password,
-            confirmPassword: this.repeatPassword
+            confirmPassword: this.repeatPassword,
           });
 
           this.password = '';
@@ -170,7 +175,7 @@ export default {
 </script>
 
 <style scoped>
-  .Password {
-    max-width: none;
-  }
+.Password {
+  max-width: none;
+}
 </style>

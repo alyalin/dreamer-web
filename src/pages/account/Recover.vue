@@ -22,7 +22,8 @@
         v-if="showErrorMessage"
         class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900 flex"
       >
-        <span class="mr-2">❌</span> Что-то пошло не так, проверьте свой почтовый ящик, возможно письмо уже там
+        <span class="mr-2">❌</span> Что-то пошло не так, проверьте свой
+        почтовый ящик, возможно письмо уже там
       </div>
 
       <div class="flex flex-col w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
@@ -91,7 +92,7 @@ export default {
       email: '',
       password: '',
       showSuccessMessage: false,
-      showErrorMessage: false
+      showErrorMessage: false,
     };
   },
   validations: {
@@ -121,8 +122,8 @@ export default {
           await this.$store.dispatch('auth/recoverPassword', {
             email: this.email,
             osName: device.os.name,
-            browserName: device.client.name
-          })
+            browserName: device.client.name,
+          });
           this.email = '';
           this.$v.$reset();
           this.showSuccessMessage = true;

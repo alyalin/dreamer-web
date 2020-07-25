@@ -22,7 +22,6 @@
       class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
       @submit.prevent="submit"
     >
-
       <div
         v-if="isRegSucceed"
         class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-green-200 rounded mb-2 border border-green-700 text-gray-900 flex"
@@ -36,7 +35,7 @@
       >
         <span class="mr-8">❌</span>
         <ul class="list-disc">
-          <li v-for="err in error">
+          <li v-for="(err, index) in error" :key="index">
             {{ err }}
           </li>
         </ul>

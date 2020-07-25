@@ -29,7 +29,7 @@
         >
           <span class="mr-8">❌</span>
           <ul class="list-disc">
-            <li v-for="err in error">
+            <li v-for="(err, index) in error" :key="index">
               {{ err }}
             </li>
           </ul>
@@ -160,7 +160,6 @@ export default {
           this.error = ['Что-то пошло не так'];
         }
         if (e.response.data.message) {
-
           console.dir(e);
           const errors = e.response.data.message;
 
