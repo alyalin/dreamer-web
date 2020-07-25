@@ -1,7 +1,17 @@
 <template>
   <Layout>
-    <h1 class="text-2xl mt-12 font-bold text-center mb-2">
+    <div v-if="isLoad" class="flex mt-12 justify-center">
+      <div
+        class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-16 w-16"
+      ></div>
+    </div>
+
+    <h1 v-if="isSuccess" class="text-2xl mt-12 font-bold text-center mb-2">
       Почта успешно подтверждена.
+    </h1>
+
+    <h1 v-if="!isSuccess" class="text-2xl mt-12 font-bold text-center mb-2">
+      Не удалось подтвердить почту.
     </h1>
 
     <div class="text-center mt-10">
@@ -13,43 +23,39 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import { validationMixin } from 'vuelidate';
-  import { email, required } from 'vuelidate/lib/validators';
-
-  export default {
-    mixins: [validationMixin],
-    data() {
-      return {
-        email: '',
-        password: '',
-      };
+export default {
+  data() {
+    return {
+      isLoad: true,
+      isSuccess: false,
+      token: null,
+    };
+  },
+  metaInfo: {
+    title: 'Подтверждение почты',
+  },
+  async mounted() {
+    this.token = this.$route.query.code;
+    await this.confirmEmail();
+    if (!token) {
+      this.$router.replace({ path: '/' });
+    }
+  },
+  methods: {
+    async confirmEmail() {
+      try {
+        await this.$store.dispatch('auth/confirmEmail', {
+          hash: this.token,
+        });
+        this.isLoad = false;
+        this.isSuccess = true;
+      } catch (e) {
+        this.isLoad = false;
+        this.isSuccess = false;
+      }
     },
-    validations: {
-      email: {
-        required,
-        email,
-      },
-    },
-    metaInfo: {
-      title: 'Восстановление пароля',
-    },
-    computed: {
-      ...mapGetters('auth', ['isAuth']),
-    },
-    methods: {
-      async submit() {
-        this.$v.$touch();
-        if (this.$v.$invalid) {
-        } else {
-          // await this.$store.dispatch('auth/login', {
-          //   email: this.email,
-          //   password: this.password
-          // })
-        }
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style></style>

@@ -14,6 +14,20 @@
         <div><strong>Vk</strong> {{ info.vk_id ? '✅' : '' }}</div>
         <div>
           <strong>Верифицирован:</strong> {{ info.verified ? 'Да' : 'Нет' }}
+          <button
+            v-if="!confirmEmailError && !emailIsSend && !info.verified"
+            class="px-1 text-xs text-white rounded bg-purple-500 hover:bg-purple-600"
+            type="button"
+            @click="handleConfirmEmailClicked"
+          >
+            Подтвердить
+          </button>
+          <span v-if="emailIsSend" class="text-green-500"
+            >Письмо было отправлено на вашу почту</span
+          >
+          <span v-if="confirmEmailError" class="text-red-500">{{
+            confirmEmailError
+          }}</span>
         </div>
       </template>
       <button
@@ -28,11 +42,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import DeviceDetector from 'device-detector-js';
 
 export default {
   data() {
     return {
-      error: '',
+      confirmEmailError: '',
+      emailIsSend: false,
     };
   },
   computed: {
@@ -53,6 +69,22 @@ export default {
   methods: {
     handleLogout() {
       this.$store.dispatch('auth/logout');
+    },
+    async handleConfirmEmailClicked() {
+      try {
+        const deviceDetector = new DeviceDetector();
+        const userAgent = navigator.userAgent;
+        const device = deviceDetector.parse(userAgent);
+        await this.$store.dispatch('auth/sendConfirmEmailMessage', {
+          osName: device.os.name,
+          browserName: device.client.name,
+        });
+        this.emailIsSend = true;
+      } catch (e) {
+        if (e.response.data.message) {
+          this.confirmEmailError = e.response.data.message;
+        }
+      }
     },
   },
 };
