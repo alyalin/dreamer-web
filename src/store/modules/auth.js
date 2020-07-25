@@ -6,7 +6,7 @@ const authModule = {
   state: () => ({
     isAuth: false,
     isRegSucceed: false,
-    isRecoverPasswordSucceed: false
+    isRecoverPasswordSucceed: false,
   }),
   mutations: {
     SET_IS_REG_SUCCEED(state, payload) {
@@ -17,7 +17,7 @@ const authModule = {
     },
     SET_RECOVER_PASSWORD_SUCCEED(state, payload) {
       state.isRecoverPasswordSucceed = payload;
-    }
+    },
   },
   actions: {
     async login({ commit }, { email, password }) {
@@ -94,8 +94,8 @@ const authModule = {
         const { data } = await this.$axios.post(
           '/auth/generate-email-reset-password',
           { email, osName, browserName },
-          { withCredentials: true }
-        )
+          { withCredentials: true },
+        );
         commit('SET_RECOVER_PASSWORD_SUCCEED', true);
       } catch (e) {
         commit('SET_RECOVER_PASSWORD_SUCCEED', false);
@@ -108,8 +108,32 @@ const authModule = {
         const { data } = await this.$axios.post(
           '/auth/reset-password',
           { hash, password, confirmPassword },
-          { withCredentials: true }
-        )
+          { withCredentials: true },
+        );
+      } catch (e) {
+        throw e;
+      }
+    },
+
+    async sendConfirmEmailMessage({ commit }, { osName, browserName }) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/generate-email-confirmation',
+          { osName, browserName },
+          { withCredentials: true },
+        );
+      } catch (e) {
+        throw e;
+      }
+    },
+
+    async confirmEmail({ commit }, { hash }) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/confirm-email',
+          { hash },
+          { withCredentials: true },
+        );
       } catch (e) {
         throw e;
       }
