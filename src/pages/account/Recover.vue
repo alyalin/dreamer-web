@@ -11,6 +11,21 @@
       class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
       @submit.prevent="submit"
     >
+      <div
+        v-if="showSuccessMessage"
+        class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-green-200 rounded mb-2 border border-green-700 text-gray-900 flex"
+      >
+        <span class="mr-2">✅</span> Письмо отправлено на ваш почтовый ящик
+      </div>
+
+      <div
+        v-if="showErrorMessage"
+        class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900 flex"
+      >
+        <span class="mr-2">❌</span> Что-то пошло не так, проверьте свой
+        почтовый ящик, возможно письмо уже там
+      </div>
+
       <div class="flex flex-col w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
         <div class="w-full mb-4">
           <label class="block text-sm mb-2 text-gray-600" for="email"
@@ -65,6 +80,7 @@
 </template>
 
 <script>
+import DeviceDetector from 'device-detector-js';
 import { mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { email, required } from 'vuelidate/lib/validators';
@@ -75,6 +91,8 @@ export default {
     return {
       email: '',
       password: '',
+      showSuccessMessage: false,
+      showErrorMessage: false,
     };
   },
   validations: {
@@ -91,13 +109,28 @@ export default {
   },
   methods: {
     async submit() {
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-      } else {
-        // await this.$store.dispatch('auth/login', {
-        //   email: this.email,
-        //   password: this.password
-        // })
+      try {
+        const deviceDetector = new DeviceDetector();
+        const userAgent = navigator.userAgent;
+        const device = deviceDetector.parse(userAgent);
+
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          this.showSuccessMessage = false;
+          this.showErrorMessage = false;
+        } else {
+          await this.$store.dispatch('auth/recoverPassword', {
+            email: this.email,
+            osName: device.os.name,
+            browserName: device.client.name,
+          });
+          this.email = '';
+          this.$v.$reset();
+          this.showSuccessMessage = true;
+          this.showErrorMessage = false;
+        }
+      } catch (e) {
+        this.showErrorMessage = true;
       }
     },
   },

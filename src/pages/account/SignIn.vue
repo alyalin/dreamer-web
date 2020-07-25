@@ -25,9 +25,14 @@
       >
         <div
           v-if="error"
-          class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900"
+          class="w-full sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 py-4 px-2 bg-red-200 rounded mb-2 border border-red-700 text-gray-900 flex"
         >
-          ❗️ {{ error }}
+          <span class="mr-8">❌</span>
+          <ul class="list-disc">
+            <li v-for="(err, index) in error" :key="index">
+              {{ err }}
+            </li>
+          </ul>
         </div>
 
         <div
@@ -67,6 +72,8 @@
               v-model.trim="$v.password.$model"
               class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
               type="password"
+              name="current-password"
+              autocomplete="current-password"
               placeholder="Минимум 6 знаков"
               :class="{ 'border-red-600': $v.password.$error }"
             />
@@ -106,7 +113,7 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import FormHelper from '~/components/FormHelper';
 import SocialLogin from '~/components/SocialLogin';
@@ -149,12 +156,20 @@ export default {
           });
         }
       } catch (e) {
-        console.dir(e);
         if (!e.status) {
-          this.error = 'Проверьте подключение к сети Интернет';
+          this.error = ['Что-то пошло не так'];
         }
-        if (e.response) {
-          this.error = e.response.data.message;
+        if (e.response.data.message) {
+          console.dir(e);
+          const errors = e.response.data.message;
+
+          if (typeof errors === 'string') {
+            this.error = [e.response.data.message];
+          }
+
+          if (errors instanceof Array) {
+            this.error = e.response.data.message;
+          }
         }
       }
     },

@@ -6,6 +6,7 @@ const authModule = {
   state: () => ({
     isAuth: false,
     isRegSucceed: false,
+    isRecoverPasswordSucceed: false,
   }),
   mutations: {
     SET_IS_REG_SUCCEED(state, payload) {
@@ -14,6 +15,9 @@ const authModule = {
     SET_AUTHENTICATED_STATE(state, payload) {
       state.isAuth = payload;
     },
+    SET_RECOVER_PASSWORD_SUCCEED(state, payload) {
+      state.isRecoverPasswordSucceed = payload;
+    },
   },
   actions: {
     async login({ commit }, { email, password }) {
@@ -21,7 +25,7 @@ const authModule = {
         const { data } = await this.$axios.post(
           '/auth/signin',
           { email, password },
-          { withCredentials: true },
+          { withCredentials: true, skipAuthRefresh: true },
         );
         handleLoginSuccess(commit, data.access_token, this.$router);
       } catch (error) {
@@ -82,6 +86,56 @@ const authModule = {
         handleLoginSuccess(commit, data.access_token, this.$router);
       } catch (e) {
         console.log(e);
+      }
+    },
+
+    async recoverPassword({ commit }, { email, osName, browserName }) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/generate-email-reset-password',
+          { email, osName, browserName },
+          { withCredentials: true },
+        );
+        commit('SET_RECOVER_PASSWORD_SUCCEED', true);
+      } catch (e) {
+        commit('SET_RECOVER_PASSWORD_SUCCEED', false);
+        throw e;
+      }
+    },
+
+    async resetPassword({ commit }, { hash, password, confirmPassword }) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/reset-password',
+          { hash, password, confirmPassword },
+          { withCredentials: true },
+        );
+      } catch (e) {
+        throw e;
+      }
+    },
+
+    async sendConfirmEmailMessage({ commit }, { osName, browserName }) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/generate-email-confirmation',
+          { osName, browserName },
+          { withCredentials: true },
+        );
+      } catch (e) {
+        throw e;
+      }
+    },
+
+    async confirmEmail({ commit }, { hash }) {
+      try {
+        const { data } = await this.$axios.post(
+          '/auth/confirm-email',
+          { hash },
+          { withCredentials: true },
+        );
+      } catch (e) {
+        throw e;
       }
     },
   },
