@@ -36,7 +36,9 @@ export default {
   },
   async mounted() {
     this.token = this.$route.query.code;
-    await this.confirmEmail();
+    setTimeout(async () => {
+      await this.confirmEmail();
+    }, 200);
     if (!token) {
       this.$router.replace({ path: '/' });
     }
