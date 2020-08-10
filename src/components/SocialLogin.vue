@@ -50,14 +50,14 @@ export default Vue.extend({
 
     async vkSignIn() {
       location.replace(
-        `https://oauth.vk.com/authorize?client_id=7527042&display=page&redirect_uri=${process.env.GRIDSOME_VK_REDIRECT}&scope=email&response_type=code&v=5.120`,
+        `https://oauth.vk.com/authorize?client_id=7480531&display=page&redirect_uri=${process.env.GRIDSOME_VK_REDIRECT}&scope=email&response_type=code&v=5.120`,
       );
     },
 
     async initFacebook() {
       window.fbAsyncInit = function () {
         window.FB.init({
-          appId: '552866345407693',
+          appId: '1121749324676689',
           cookie: false,
           version: 'v7.0',
         });
