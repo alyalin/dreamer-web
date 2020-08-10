@@ -40,14 +40,16 @@
             type="password"
             :class="{ 'border-red-600': $v.password.$error }"
           />
-          <password
-            v-model="password"
-            class="max-w-none"
-            :strength-meter-only="true"
-            :secure-length="8"
-            :toggle="true"
-            :show-password="true"
-          />
+          <ClientOnly>
+            <password
+              v-model="password"
+              class="max-w-none"
+              :strength-meter-only="true"
+              :secure-length="8"
+              :toggle="true"
+              :show-password="true"
+            />
+          </ClientOnly>
           <div v-if="!$v.password.minLength" class="text-red-600">
             Пароль должен иметь минимум
             {{ $v.password.$params.minLength.min }} знаков.
