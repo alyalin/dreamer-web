@@ -11,6 +11,12 @@ import rootStore from './store';
 import { parseJwt } from './utils/jwt-decode';
 
 export default async function (Vue, { router, head, isClient, appOptions }) {
+  head.link.push({
+    rel: 'stylesheet',
+    href:
+      'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap',
+  });
+
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout);
   Vue.use(Vuex);

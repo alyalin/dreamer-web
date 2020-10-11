@@ -1,29 +1,53 @@
 <template>
   <div class="layout">
-    <AppHeader />
-    <slot />
+    <div class="content">
+      <AppHeader />
+      <slot />
+    </div>
+    <AppFooter />
   </div>
 </template>
 
 <static-query>
-  query {
-    metadata {
-      siteName
-    }
+query {
+  metadata {
+    siteName
   }
+}
 </static-query>
 
 <script>
 import AppHeader from '../components/AppHeader';
+import AppFooter from '../components/AppFooter';
 
 export default {
   components: {
     AppHeader,
+    AppFooter,
   },
 };
 </script>
 
 <style>
+html,
+body {
+}
+
+.content {
+  background-image: linear-gradient(90.12deg, #1d4592 -20.25%, #85c2c6 125.99%);
+  background-color: #85c2c6;
+  -webkit-overflow-scrolling: touch;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+  }
+}
+
 .loader {
   border-top-color: #3498db;
   -webkit-animation: spinner 1.5s linear infinite;

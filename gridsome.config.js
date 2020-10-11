@@ -6,6 +6,7 @@
 
 module.exports = {
   siteName: 'Дример',
+  port: 4300,
   plugins: [
     {
       use: 'gridsome-plugin-tailwindcss',

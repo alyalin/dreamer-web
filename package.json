@@ -14,7 +14,7 @@
     "axios": "^0.19.2",
     "axios-auth-refresh": "^2.2.7",
     "device-detector-js": "^2.2.1",
-    "gridsome": "0.7.19",
+    "gridsome": "0.7.21",
     "js-cookie": "^2.2.1",
     "vue-password-strength-meter": "^1.7.2",
     "vuelidate": "^0.7.5",
@@ -28,7 +28,7 @@
     "eslint-plugin-gridsome": "^1.4.12",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "gridsome-plugin-tailwindcss": "^2.2.48",
+    "gridsome-plugin-tailwindcss": "3.0.1",
     "prettier": "^2.0.5",
     "vue-eslint-parser": "^7.1.0"
   }
