@@ -1,10 +1,14 @@
 <template>
-  <div class="bg-white z-50 relative pt-20 pb-18 lg:pb-24 footer">
+  <div class="bg-white z-40 relative pt-20 pb-18 lg:pb-24 footer">
     <div class="container px-8 md:px-2 mx-auto flex flex-col lg:flex-row">
-      <div class="absolute block lg:hidden right-0 top-0" style="right: 26px; top: -15px;">
+      <div
+        class="absolute block lg:hidden right-0 top-0"
+        style="right: 26px; top: -15px"
+      >
         <button
-            class="flex relative z-10 justify-center items-center bg-accent rounded-full"
-            style="width: 64px;height: 64px;"
+          class="flex relative z-10 justify-center items-center bg-accent rounded-full"
+          style="width: 64px; height: 64px"
+          @click="handleMobileSubscribeClick()"
         >
           <g-image src="~/assets/mail-lg.svg" />
         </button>
@@ -101,12 +105,51 @@
         </div>
       </div>
     </div>
+
+    <AppDrawer ref="subscribeDrawerRef" position="bottom">
+      <template v-slot:content>
+        <div class="py-10">
+          <h4 class="font-bold text-2xl mb-10 px-10">
+            Подпишись <br />
+            на новые дримы!
+          </h4>
+
+          <form class="mx-6 relative mb-10">
+            <g-image
+              class="absolute top-0 bottom-0 my-auto"
+              style="height: 40px; left: 12px"
+              src="~/assets/mail.svg"
+              width="40"
+            />
+            <input
+              class="border w-full border-gray-400 rounded-lg px-16 py-6 placeholder-gray-300"
+              type="email"
+              placeholder="your@email"
+            />
+            <button
+              class="absolute right-0 top-0 bottom-0 my-auto bg-accent rounded-full"
+              style="height: 47px; right: -20px"
+            >
+              <g-image src="~/assets/arrow.svg" width="47" />
+            </button>
+          </form>
+          <p class="text-black px-10 text-sm text-opacity-50 mb-20">
+            Оставь нам свою почту, чтобы первым получать наши новости, бонусы и
+            специальные предложения
+          </p>
+        </div>
+      </template>
+    </AppDrawer>
   </div>
 </template>
 
 <script>
+import AppDrawer from './AppDrawer';
 export default {
   name: 'AppFooter',
+  components: {
+    AppDrawer,
+  },
   created() {
     if (process.isClient) {
       window.addEventListener('resize', this.handleResize);
@@ -142,6 +185,9 @@ export default {
       } else {
         elem.removeAttribute('open');
       }
+    },
+    handleMobileSubscribeClick() {
+      this.$refs.subscribeDrawerRef.open();
     },
   },
 };

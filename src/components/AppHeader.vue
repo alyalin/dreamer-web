@@ -50,19 +50,87 @@
         Профиль
       </g-link>
 
-      <g-image class="lg:hidden" src="~/assets/burger.svg" width="34.8" />
+      <g-image
+        class="lg:hidden"
+        src="~/assets/burger.svg"
+        width="34.8"
+        @click="handleMobileMenuClick()"
+      />
     </div>
+    <AppDrawer ref="mobileMenuDrawer" position="right">
+      <template v-slot:content>
+        <div class="flex flex-col flex-1 py-20 h-full">
+          <nav class="flex flex-col flex-1" style="width: 320px">
+            <span class="mb-4" @click="handleMobileMenuClick()">
+              <g-link
+                to="/dreams/"
+                class="block font-display text-black text-xl py-2 px-10 tracking-wider no-underline"
+              >
+                Дримы
+              </g-link>
+            </span>
+
+            <span class="mb-4" @click="handleMobileMenuClick()">
+              <g-link
+                to="/partners/"
+                class="block font-display text-xl text-black py-2 px-10 tracking-wider no-underline"
+              >
+                Партнеры
+              </g-link>
+            </span>
+
+            <span class="mb-4" @click="handleMobileMenuClick()">
+              <g-link
+                to="/blog/"
+                class="block font-display text-xl text-black py-2 px-10 tracking-wider no-underline"
+              >
+                Блог
+              </g-link>
+            </span>
+
+            <span class="mb-4" @click="handleMobileMenuClick()">
+              <g-link
+                to="/about-us/"
+                class="block font-display text-xl text-black py-2 px-10 tracking-wider no-underline"
+              >
+                О нас
+              </g-link>
+            </span>
+
+            <span class="mb-4 mt-auto" @click="handleMobileMenuClick()">
+              <g-link
+                v-show="!isAuth"
+                to="/account/sign-in/"
+                class="font-display text-xl tracking-wider border-2 border-primary mt-auto text-primary py-2 px-8 mx-10 self-start text-center rounded-full no-underline"
+              >
+                Вход
+              </g-link>
+            </span>
+          </nav>
+        </div>
+      </template>
+    </AppDrawer>
   </div>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import AppDrawer from './AppDrawer';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'AppHeader',
+  components: {
+    AppDrawer,
+  },
   computed: {
     ...mapGetters('auth', ['isAuth']),
+  },
+  methods: {
+    handleMobileMenuClick() {
+      if (this.$refs.mobileMenuDrawer) {
+        this.$refs.mobileMenuDrawer.open();
+      }
+    },
   },
 };
 </script>

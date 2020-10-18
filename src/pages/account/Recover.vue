@@ -1,11 +1,11 @@
 <template>
   <Layout>
     <h1 class="text-2xl mt-12 font-bold text-center mb-2">
-      Забыли пароль?
-    </h1>
+Забыли пароль?
+</h1>
     <div class="text-center mb-12">
-      Не волнуйтесь, shit happens
-    </div>
+Не волнуйтесь, shit happens
+</div>
 
     <form
       class="flex flex-col w-full justify-center items-center mb-4 px-10 sm:px-0"
@@ -65,8 +65,8 @@
         <div class="h-px w-full bg-gray-400 mb-4" />
         <div class="inline-flex text-lg">
           <h2 class="font-bold mr-2">
-            Передумали?
-          </h2>
+Передумали?
+</h2>
           <g-link
             to="/account/sign-in/"
             class="text-purple-500 font-bold no-underline"

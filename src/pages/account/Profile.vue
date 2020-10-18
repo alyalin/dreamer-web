@@ -2,8 +2,8 @@
   <Layout>
     <div class="container mx-auto px-6">
       <h1 class="text-3xl font-bold mb-4">
-        Мой профиль
-      </h1>
+Мой профиль
+</h1>
       <template v-if="info">
         <div><strong>Имя:</strong> {{ info.firstName }}</div>
         <div><strong>Фамилия:</strong> {{ info.lastName }}</div>

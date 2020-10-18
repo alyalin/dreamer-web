@@ -12,8 +12,8 @@
       >
         <div class="h-px w-full bg-gray-400" />
         <div class="mx-1 text-gray-500">
-          или
-        </div>
+или
+</div>
         <div class="h-px w-full bg-gray-400" />
       </div>
     </div>

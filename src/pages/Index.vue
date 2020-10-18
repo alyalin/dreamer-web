@@ -154,7 +154,9 @@
         class="inline-block flex-shrink-0 how-it-works-elem mr-20 lg:mr-40 whitespace-normal"
       >
         <g-image class="mb-2" src="~/assets/event.svg" width="60" />
-        <h3 class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4">
+        <h3
+          class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
+        >
           Выбери дрим событие
         </h3>
         <p class="text-white text-xl lg:text-2xl">
@@ -167,7 +169,9 @@
         class="inline-block how-it-works-elem flex-shrink-0 mr-20 lg:mr-40 whitespace-normal"
       >
         <g-image class="mb-2" src="~/assets/doughnut.svg" width="60" />
-        <h3 class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4">
+        <h3
+          class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
+        >
           Поддержи доброе дело
         </h3>
         <p class="text-white text-xl lg:text-2xl">
@@ -179,7 +183,9 @@
         class="inline-block how-it-works-elem flex-shrink-0 mr-20 lg:mr-40 whitespace-normal"
       >
         <g-image class="mb-2" src="~/assets/event.svg" width="60" />
-        <h3 class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4">
+        <h3
+          class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
+        >
           Выиграй главный приз
         </h3>
         <p class="text-white text-xl lg:text-2xl">
@@ -402,7 +408,7 @@ export default {
   }
 
   .how-it-works-elem {
-    width: 350px;
+    width: 330px;
   }
 }
 </style>

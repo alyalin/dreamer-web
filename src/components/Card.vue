@@ -2,10 +2,7 @@
   <div class="relative">
     <div class="card-body relative z-10 bg-white">
       <AppProgress class="absolute" style="left: 30px; top: 30px" />
-      <div
-        class="overflow-hidden relative"
-        style="border-radius: 24px"
-      >
+      <div class="overflow-hidden relative" style="border-radius: 24px">
         <slot name="image"></slot>
       </div>
       <div>
@@ -21,8 +18,8 @@
         </ul>
       </div>
       <button
-          class="transform scale-75 lg:scale-100 flex justify-center items-center absolute bottom-0 bg-accent rounded-full"
-          style="width: 80px; height: 80px; bottom: -40px; right: 37px"
+        class="transform scale-75 lg:scale-100 flex justify-center items-center absolute bottom-0 bg-accent rounded-full"
+        style="width: 80px; height: 80px; bottom: -40px; right: 37px"
       >
         <g-image src="~/assets/arrow-lg.svg" />
       </button>

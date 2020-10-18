@@ -16,8 +16,8 @@
 
     <div class="text-center mt-10">
       <g-link class="text-2xl" to="/">
-        ⟵ Вернуться на главную
-      </g-link>
+⟵ Вернуться на главную
+</g-link>
     </div>
   </Layout>
 </template>

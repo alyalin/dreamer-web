@@ -94,8 +94,8 @@
         <div class="h-px w-full bg-gray-400 mb-4" />
         <div class="inline-flex text-lg">
           <h2 class="font-bold mr-2">
-            Передумали?
-          </h2>
+Передумали?
+</h2>
           <g-link
             to="/account/sign-in/"
             class="text-purple-500 font-bold no-underline"
