@@ -45,7 +45,7 @@
       <g-link
         v-show="isAuth"
         to="/account/profile/"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-4 rounded no-underline"
+        class="font-display hidden lg:block text-xl tracking-wider bg-white text-primary font-bold py-3 px-16 ml-8 rounded-full no-underline"
       >
         Профиль
       </g-link>
@@ -104,6 +104,16 @@
                 class="font-display text-xl tracking-wider border-2 border-primary mt-auto text-primary py-2 px-8 mx-10 self-start text-center rounded-full no-underline"
               >
                 Вход
+              </g-link>
+            </span>
+
+            <span class="mb-4 mt-auto" @click="handleMobileMenuClick()">
+              <g-link
+                v-show="isAuth"
+                to="/account/profile/"
+                class="font-display text-xl tracking-wider border-2 border-primary mt-auto text-primary py-2 px-8 mx-10 self-start text-center rounded-full no-underline"
+              >
+                Профиль
               </g-link>
             </span>
           </nav>
