@@ -15,6 +15,9 @@ module.exports = {
         accent: '#8EE13B',
         brown: '#412E2D',
       },
+      borderColor: {
+        primary: '#7ACB2C',
+      },
       backgroundColor: {
         accent: '#8EE13B',
       },
@@ -24,6 +27,9 @@ module.exports = {
       },
       fontSize: {
         '8xl': ['96px', { letterSpacing: '-0.02em', lineHeight: '96px' }],
+      },
+      borderRadius: {
+        'd-xl': '24px',
       },
     },
   },
