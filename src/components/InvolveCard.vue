@@ -3,15 +3,7 @@
     <div class="card-body relative z-10 bg-white">
       <div
         class="overflow-hidden relative flex items-center justify-center"
-        style="
-          height: 257px;
-          border-radius: 24px;
-          background: linear-gradient(
-            127.09deg,
-            #dcffd0 -9.32%,
-            #a7dfff 70.35%
-          );
-        "
+        style="height: 257px; border-radius: 24px; background: linear-gradient(127.09deg, #dcffd0 -9.32%, #a7dfff 70.35%);"
       >
         <slot name="image"></slot>
       </div>
