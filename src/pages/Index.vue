@@ -43,7 +43,7 @@
           class="mr-16 inline-block whitespace-normal pointer-events-none"
           style="opacity: 0.05"
           img-url="~/assets/yurec.png"
-          feature-first-line="Гулем по секретному Питеру вместе с Fuze"
+          feature-first-line="Гуляем по секретному Питеру вместе с Fuze"
           feature-second-line="Детский дом «Маленький принц»"
         >
           <template v-slot:image>
@@ -94,7 +94,7 @@
       :style="{ paddingLeft: dreamersSectionMargin }"
     >
       <Card
-        class="inline-block align-top mr-16 whitespace-normal"
+        class="inline-block align-top mr-10 lg:mr-16 whitespace-normal"
         img-url="~/assets/yurec.png"
         feature-first-line="Мощно зависаем на съемках у Дудя"
         feature-second-line="Фонд Константина Хабенского"
@@ -104,7 +104,7 @@
         </template>
       </Card>
 
-      <PlaceholderCard class="inline-block align-top mr-16 whitespace-normal">
+      <PlaceholderCard class="inline-block align-top mr-10 lg:mr-16 whitespace-normal">
         <template v-slot:content>
           <div class="px-8 py-20 lg:pt-40 lg:px-16">
             <g-image class="mb-16" src="~/assets/logo-sign.svg"></g-image>
@@ -117,7 +117,7 @@
       </PlaceholderCard>
 
       <PlaceholderCard
-        class="inline-block align-top mr-16 whitespace-normal"
+        class="inline-block align-top mr-10 lg:mr-16 whitespace-normal"
         :background="false"
       >
         <template v-slot:content>
