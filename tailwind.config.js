@@ -26,7 +26,8 @@ module.exports = {
         body: ['"Open Sans"', 'sans-serif'],
       },
       fontSize: {
-        '8xl': ['96px', { letterSpacing: '-0.02em', lineHeight: '96px' }],
+        '8xl': ['6rem'],
+        '7xl': ['5rem'],
       },
       borderRadius: {
         'd-xl': '24px',
