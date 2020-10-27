@@ -7,19 +7,19 @@
       >
         <div id="heroSectionTitle" class="relative w-full lg:w-8/12 z-20">
           <h1
-            class="leading-none text-5xl lg:text-8xl font-black font-display text-white"
+            class="leading-none text-5xl lg:text-7xl xl:text-8xl font-black font-display text-white"
           >
             Мечты <br />
             сбываются
           </h1>
           <p
-            class="text-accent mt-2 font-display font-semibold text-xl lg:text-3xl"
+            class="text-accent mt-2 font-display font-semibold text-xl lg:text-2xl xl:text-3xl"
           >
             у тех, кто готов отдавать
           </p>
 
           <p
-            class="w-full md:w-8/12 lg:w-9/12 font-display lg:text-xl text-white mt-10"
+            class="w-full md:w-8/12 lg:w-9/12 font-display text-base xl:text-xl text-white mt-10"
           >
             Dreamer даёт возможность любому человеку провести день мечты с
             кумиром и сделать мир чуточку добрее
@@ -77,12 +77,12 @@
 
     <div class="container mx-auto px-8 lg:px-2 font-display dreams-section">
       <h2
-        class="leading-none text-5xl lg:text-8xl font-black text-white inline-flex mb-12"
+        class="leading-none text-5xl lg:text-7xl xl:text-8xl font-black text-white inline-flex mb-12"
       >
         Дримы <sup class="text-2xl align-text-top text-primary">321</sup>
       </h2>
 
-      <p class="text-accent font-semibold mb-16 lg:text-3xl">
+      <p class="text-accent font-semibold mb-16 text-xl lg:text-2xl xl:text-3xl">
         Нет, тебе не приснилось – ты можешь стать участником любого из этих
         событий уже сейчас
       </p>
@@ -137,10 +137,10 @@
       id="howItWorks"
       class="container mx-auto px-8 md:px-2 lg:mt-64 font-display"
     >
-      <p class="text-accent font-semibold text-xl lg:text-3xl mb-4">
+      <p class="text-accent font-semibold text-xl lg:text-2xl xl:text-3xl mb-4">
         Короткая инструкция
       </p>
-      <h2 class="leading-none text-5xl lg:text-8xl font-black text-white mb-12">
+      <h2 class="leading-none text-5xl lg:text-7xl xl:text-8xl font-black text-white mb-12">
         Как это <br />
         работает
       </h2>
@@ -155,11 +155,11 @@
       >
         <g-image class="mb-2" src="~/assets/event.svg" width="60" />
         <h3
-          class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
+          class="text-2xl xl:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
         >
           Выбери дрим событие
         </h3>
-        <p class="text-white text-xl lg:text-2xl">
+        <p class="text-white text-xl xl:text-2xl">
           Dreamer вместе со звёздными партнёрами готовит уникальные события или
           <strong>Дримы</strong>, которые доступны каждому участнику нашего
           благотворительного розыгрыша
@@ -170,11 +170,11 @@
       >
         <g-image class="mb-2" src="~/assets/doughnut.svg" width="60" />
         <h3
-          class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
+          class="text-2xl xl:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
         >
           Поддержи доброе дело
         </h3>
-        <p class="text-white text-xl lg:text-2xl">
+        <p class="text-white text-xl xl:text-2xl">
           Сделай взнос на странице Дрима – можно оставить любую сумму, начиная
           от 200 руб. Чем больше взнос, тем больше шанс стать победителем Дрима.
         </p>
@@ -184,11 +184,11 @@
       >
         <g-image class="mb-2" src="~/assets/event.svg" width="60" />
         <h3
-          class="text-2xl lg:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
+          class="text-2xl xl:text-4xl text-accent leading-6 lg:leading-9 font-bold mb-4"
         >
           Выиграй главный приз
         </h3>
-        <p class="text-white text-xl lg:text-2xl">
+        <p class="text-white text-xl xl:text-2xl">
           Победитель будет выбран рандомайзером в момент окончания розыгрыша.
           Шансы на победу есть у каждого участника, а процедура розыгрыша
           абсолютно прозрачная.
@@ -205,12 +205,12 @@
       <div class="container relative flex mx-auto px-8 md:px-2">
         <div class="relative w-full z-20 lg:pt-20">
           <h2
-            class="leading-none text-5xl lg:text-8xl font-black font-display text-white mb-10"
+            class="leading-none text-5xl lg:text-7xl xl:text-8xl font-black font-display text-white mb-10"
           >
             Дример <br />
             помогает
           </h2>
-          <p class="text-white w-full lg:w-6/12 lg:text-3xl">
+          <p class="text-white w-full lg:w-6/12 text-xl lg:text-2xl xl:text-3xl">
             Мы помогаем проверенным благотворительным организациям по всей
             России, предоставляя доступ к новому поколению диджитал
             жертвователей
