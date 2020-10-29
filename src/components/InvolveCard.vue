@@ -8,23 +8,23 @@
         <slot name="image"></slot>
       </div>
       <div>
-        <ul class="px-4 py-5 lg:px-5 lg:py-10">
+        <ul class="px-4 py-5 lg:px-5 lg:py-8 xl:py-10">
           <li class="flex flex-col mb-8 text-base lg:text-xl">
             <span class="font-medium" style="color: #cbcbcb">Привлекли</span>
             <span
-              class="font-black text-3xl lg:text-5xl leading-none"
+              class="font-black text-3xl lg:text-4xl xl:text-5xl leading-none"
               style="color: #412e2d"
               >{{ amount }} ₽</span
             >
           </li>
-          <li class="flex mb-2 lg:mb-8 items-center text-base lg:text-xl">
+          <li class="flex mb-2 lg:mb-5 xl:mb-6 items-center text-base lg:text-xl">
             <g-image
               class="mr-2 lg:mr-4 transform scale-75 lg:scale-100"
               src="~/assets/event-sm.svg"
             />
             {{ events }} событий
           </li>
-          <li class="flex mb-2 lg:mb-8 items-center text-base lg:text-xl">
+          <li class="flex items-center text-base lg:text-xl">
             <g-image
               class="mr-2 lg:mr-4 transform scale-75 lg:scale-100"
               src="~/assets/doughnut-sm.svg"
@@ -83,6 +83,17 @@ export default {
 }
 
 @media (min-width: 1024px) {
+  .card-body {
+    width: 360px;
+  }
+
+  .card-shadow {
+    top: 70px;
+    bottom: 30px;
+  }
+}
+
+@media (min-width: 1280px) {
   .card-body {
     width: 424px;
   }

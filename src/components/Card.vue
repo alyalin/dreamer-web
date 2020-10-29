@@ -70,6 +70,17 @@ export default {
 
 @media (min-width: 1024px) {
   .card-body {
+    width: 360px;
+  }
+
+  .card-shadow {
+    top: 70px;
+    bottom: 30px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-body {
     width: 424px;
   }
 

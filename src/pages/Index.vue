@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <div class="container mx-auto px-8 lg:px-2 font-display dreams-section">
+    <div class="container mx-auto px-8 md:px-2 font-display dreams-section">
       <h2
         class="leading-none text-5xl lg:text-7xl xl:text-8xl font-black text-white inline-flex mb-12"
       >
@@ -135,7 +135,7 @@
 
     <div
       id="howItWorks"
-      class="container mx-auto px-8 md:px-2 lg:mt-64 font-display"
+      class="container mx-auto px-8 md:px-2 lg:mt-48 xl:mt-64 font-display"
     >
       <p class="text-accent font-semibold text-xl lg:text-2xl xl:text-3xl mb-4">
         Короткая инструкция

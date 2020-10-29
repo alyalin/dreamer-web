@@ -29,8 +29,8 @@ export default {
 </script>
 
 <style>
-html,
-body {
+html {
+  /*font-size: 14.4px*/
 }
 
 .content {
