@@ -398,7 +398,7 @@ export default {
   width: 280px;
 }
 
-@media (min-width: 1024px) {
+@screen md {
   .dreamer-helps {
     padding-bottom: 22rem;
   }

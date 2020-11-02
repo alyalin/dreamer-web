@@ -41,7 +41,7 @@ html {
   background-attachment: fixed;
 }
 
-@media (min-width: 1024px) {
+@screen md {
   .content {
     border-bottom-right-radius: 32px;
     border-bottom-left-radius: 32px;

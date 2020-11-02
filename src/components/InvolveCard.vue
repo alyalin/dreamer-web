@@ -82,7 +82,7 @@ export default {
   filter: blur(32px);
 }
 
-@media (min-width: 1024px) {
+@screen md {
   .card-body {
     width: 360px;
   }
@@ -93,7 +93,7 @@ export default {
   }
 }
 
-@media (min-width: 1280px) {
+@screen xl {
   .card-body {
     width: 424px;
   }

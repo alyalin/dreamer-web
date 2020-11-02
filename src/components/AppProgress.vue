@@ -48,7 +48,7 @@ export default {
   opacity: 0.3;
 }
 
-@media (min-width: 1024px) {
+@screen md {
   .dream-progress {
     width: 164px;
     height: 42px;
